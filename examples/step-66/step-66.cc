@@ -570,7 +570,7 @@ namespace Step66
       system_mf_storage->reinit(mapping,
                                 dof_handler,
                                 constraints,
-                                QGauss<1>(fe.degree + 1),
+                                QGauss<1>(fe_degree + 1),
                                 additional_data);
 
       system_matrix.initialize(system_mf_storage);
@@ -618,7 +618,7 @@ namespace Step66
         mg_mf_storage_level->reinit(mapping,
                                     dof_handler,
                                     level_constraints,
-                                    QGauss<1>(fe.degree + 1),
+                                    QGauss<1>(fe_degree + 1),
                                     additional_data);
 
         mg_matrices[level].initialize(mg_mf_storage_level,
@@ -984,7 +984,7 @@ namespace Step66
                                       solution,
                                       Functions::ZeroFunction<dim>(),
                                       norm_per_cell,
-                                      QGauss<dim>(fe.degree + 2),
+                                      QGauss<dim>(fe_degree + 2),
                                       VectorTools::H1_seminorm);
 
     solution.zero_out_ghost_values();
@@ -1038,7 +1038,7 @@ namespace Step66
     data_out.add_data_vector(subdomain, "subdomain");
 
     data_out.build_patches(mapping,
-                           fe.degree,
+                           fe_degree,
                            DataOut<dim>::curved_inner_cells);
 
     DataOutBase::VtkFlags flags;
